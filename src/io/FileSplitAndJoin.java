@@ -46,9 +46,7 @@ public class FileSplitAndJoin {
                 fis = new FileInputStream(file);
                 transfer(fis, fos, (int) file.length());
             }
-
         }
-
     }
 
     public static void transfer(InputStream fis, OutputStream fos, int partSize) throws IOException {
