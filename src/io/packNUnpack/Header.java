@@ -34,4 +34,9 @@ public class Header {
     public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
+
+    @Override
+    public String toString() {
+        return this.pos + " " + this.fileName + " " + this.fileSize;
+    }
 }

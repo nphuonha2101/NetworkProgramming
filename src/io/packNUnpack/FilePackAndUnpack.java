@@ -84,7 +84,7 @@ public class FilePackAndUnpack {
         }
     }
 
-    public boolean unpack(String filePack, String fileName, String unpackPath) throws IOException {
+    public void unpack(String filePack, String fileName, String unpackPath) throws IOException {
         File f = new File(filePack);
         RandomAccessFile raf = new RandomAccessFile(f, "r");
         FileOutputStream fos;
@@ -102,6 +102,8 @@ public class FilePackAndUnpack {
             headers[i] = header;
         }
 
+//        System.out.println(Arrays.toString(headers));
+
         // find file with name
         for (Header header : headers) {
             if (header.getFileName().contains(fileName)) {
@@ -109,11 +111,9 @@ public class FilePackAndUnpack {
                 fos = new FileOutputStream(unpackPath + "\\" + header.getFileName());
                 System.out.println(unpackPath + "\\" + header.getFileName());
                 transfer(fos, raf, header.getFileSize());
-            } else
-                return false;
+            }
         }
 
-        return true;
     }
 
     public static void main(String[] args) throws IOException {
@@ -121,9 +121,9 @@ public class FilePackAndUnpack {
         String packFile = "C:\\Users\\NhaNguyen\\Desktop\\data.pack";
 
         FilePackAndUnpack filePackAndUnpack = new FilePackAndUnpack();
-        filePackAndUnpack.pack(packFile, folderPath);
+//        filePackAndUnpack.pack(packFile, folderPath);
 
-        filePackAndUnpack.unpack(packFile, "apache-tomcat-10.1.10.exe", "C:\\Users\\NhaNguyen\\Desktop");
+        filePackAndUnpack.unpack(packFile, "a", "C:\\Users\\NhaNguyen\\Desktop");
 
 
     }
