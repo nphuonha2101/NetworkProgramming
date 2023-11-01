@@ -37,9 +37,8 @@ public class StudentManagement {
 			Student st = new Student(Integer.parseInt(stDataArr[0]), stDataArr[1], Integer.parseInt(stDataArr[2]), grades);
 			for (String gradeRaw : gradeRawDatas) {
 				String[] gradeDataArr = gradeRaw.split("\t");
-				System.out.println("grades: " + Arrays.toString(gradeDataArr));
 				if (Integer.parseInt(gradeDataArr[0]) == st.getId()) {
-					for (int i = 1; i <= stDataArr.length; i++) {
+					for (int i = 1; i < gradeDataArr.length; i++) {
 						double grade = Double.parseDouble(gradeDataArr[i]);
 	
 						grades.add(grade);
