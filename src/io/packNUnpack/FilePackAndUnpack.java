@@ -123,7 +123,7 @@ public class FilePackAndUnpack {
         FilePackAndUnpack filePackAndUnpack = new FilePackAndUnpack();
 //        filePackAndUnpack.pack(packFile, folderPath);
 
-        filePackAndUnpack.unpack(packFile, "a", "C:\\Users\\NhaNguyen\\Desktop");
+        filePackAndUnpack.unpack(packFile, "Authy", "C:\\Users\\NhaNguyen\\Desktop");
 
 
     }

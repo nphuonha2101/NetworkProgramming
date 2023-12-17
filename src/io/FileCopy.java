@@ -21,6 +21,6 @@ public class FileCopy {
     }
 
     public static void main(String[] args) throws IOException {
-
+        FileCopy.copyFile("src/io/FileCopy.java", "src/io/FileCopy2.java");
     }
 }
