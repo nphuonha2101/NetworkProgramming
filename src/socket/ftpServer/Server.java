@@ -1,27 +1,28 @@
-package socket.echoServer;
+package socket.ftpServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class EchoServer {
-
+public class Server {
+    private static final int PORT = 5678;
     private ServerSocket server;
 
     public static void main(String[] args) throws IOException {
-        EchoServer echoServer = new EchoServer();
-        echoServer.startServer();
+        Server server = new Server();
+        server.startServer();
     }
 
     public void startServer() throws IOException {
-        server = new ServerSocket(7777);
-        System.out.println("Server is listening at port " + 7777);
+        server = new ServerSocket(PORT);
+        System.out.println("Server is listening at port " + PORT);
 
         while (true) {
             Socket client = server.accept();
 
             new Thread(new ServerThread(server, client)).start();
         }
+
 
     }
 }
