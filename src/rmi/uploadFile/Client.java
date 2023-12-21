@@ -81,34 +81,61 @@ public class Client {
                 param2 = commandTokens.nextToken().trim();
 
 
-                if (cmd.equals("upload")) {
-                    System.out.println(sessionID);
+                switch (cmd) {
+                    case "upload": {
+                        System.out.println(sessionID);
 
-                    upload.createFile(param2, sessionID);
+                        upload.createFile(param2, sessionID);
 
-                    BufferedInputStream bis = new BufferedInputStream(new FileInputStream(param1));
-                    byte[] data = new byte[102400];
-                    int bytesRead;
-                    while ((bytesRead = bis.read(data)) != -1) {
-                        System.out.println(bytesRead);
-                        byte[] fitData = new byte[bytesRead];
-                        System.arraycopy(data, 0, fitData, 0, bytesRead);
+                        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(param1));
+                        byte[] data = new byte[102400];
+                        int bytesRead;
+                        while ((bytesRead = bis.read(data)) != -1) {
+                            System.out.println(bytesRead);
+                            byte[] fitData = new byte[bytesRead];
+                            System.arraycopy(data, 0, fitData, 0, bytesRead);
 
-                        upload.transferFile(fitData, sessionID);
+                            upload.transferFile(fitData, sessionID);
 
+                        }
+                        bis.close();
+                        upload.closeTransfer(sessionID);
+
+                        System.out.println("Upload successfully");
+                        break;
                     }
-                    bis.close();
-                    upload.closeTransfer(sessionID);
 
-                    System.out.println("Upload successfully");
-                } else {
-                    System.out.println("Not valid command!");
+                    case "get": {
+                        byte[] data;
+                        OutputStream os = new BufferedOutputStream(new FileOutputStream(param2));
+                        do {
+                            data = upload.getDataFromServer(param1, sessionID);
+
+                            if (data != null)
+                                os.write(data);
+                            else {
+                                System.out.println("Get data failed!");
+                                break;
+                            }
+
+                        } while (data != null);
+
+                        os.close();
+
+                        System.out.println("Get data from server successfully!");
+                        break;
+                    }
+                    default: {
+                        System.out.println("Not valid command!");
+                    }
                 }
-            }
 
+            }
             if (commandTokens.countTokens() == 1 && command.equals("quit")) {
                 break;
             }
         }
     }
+
+
 }
